@@ -2,6 +2,8 @@ import uuid
 
 from django.db import models
 
+from apps.threats.models import Threat
+
 
 class Event(models.Model):
     id = models.UUIDField(
@@ -18,6 +20,12 @@ class Event(models.Model):
     event_date = models.DateField()
 
     description = models.TextField()
+
+    threats = models.ManyToManyField(
+        Threat,
+        related_name="events",
+        blank=True
+    )
 
     is_active = models.BooleanField(
         default=True

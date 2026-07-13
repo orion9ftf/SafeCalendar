@@ -19,4 +19,8 @@ class EventAdmin(admin.ModelAdmin):
         "is_active",
     )
 
+    filter_horizontal = (
+        "threats",
+    )
+
     
