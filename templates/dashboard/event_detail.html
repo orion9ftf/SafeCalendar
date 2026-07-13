@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>{{ event.name }}</title>
+</head>
+<body>
+
+    <h1>{{ event.name }}</h1>
+    <p><strong>Fecha:</strong>{{ event.event_date }}</p>
+
+    <p><strong>Nivel de riesgo:</strong>{{ event.get_risk_level_display }}</p>
+
+    <p><strong>Descripción:</strong>{{ event.description }}</p>
+
+    <h2>Amenazas asociadas</h2>
+
+    <ul>{% for threat in event.threats.all %}
+        <li><strong>{{ threat.name }}</strong></li>
+        {% empty %}
+        <li>No existen amenazas asociadas.</li>
+        {% endfor %}
+    </ul>
+    <p>/Volver</a></p>
+</body>
+</html>
