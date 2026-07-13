@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang=
+<head>
+    <meta charset="utf-8">
+    <title>Calendario Blindado</title>
+</head>
+<body>
+
+    <h1>Calendario Blindado</h1>
+
+    <h2>Eventos Activos</h2>
+
+    <ul>
+        {% for event in events %}
+            <li>
+                {% url 'event_detail' event.id %}
+                    {{ event.name }}
+                </a>
+                -
+                {{ event.event_date }}
+                -
+                {{ event.get_risk_level_display }}
+            </li>
+        {% empty %}
+            <li>No existen eventos registrados.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

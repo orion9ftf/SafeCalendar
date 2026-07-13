@@ -6,6 +6,13 @@ from apps.threats.models import Threat
 
 
 class Event(models.Model):
+
+    class RiskLevel(models.TextChoices):
+        LOW = "LOW", "Bajo"
+        MEDIUM = "MEDIUM", "Medio"
+        HIGH = "HIGH", "Alto"
+        CRITICAL = "CRITICAL", "Crítico"
+
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -25,6 +32,12 @@ class Event(models.Model):
         Threat,
         related_name="events",
         blank=True
+    )
+
+    risk_level = models.CharField(
+        max_length=10,
+        choices=RiskLevel.choices,
+        default=RiskLevel.MEDIUM
     )
 
     is_active = models.BooleanField(
