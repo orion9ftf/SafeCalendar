@@ -40,6 +40,18 @@ class Event(models.Model):
         default=RiskLevel.MEDIUM
     )
 
+    curve_a = models.FloatField(
+        default=-1
+    )
+
+    curve_b = models.FloatField(
+        default=0
+    )
+
+    curve_c = models.FloatField(
+        default=100
+    )
+
     is_active = models.BooleanField(
         default=True
     )
