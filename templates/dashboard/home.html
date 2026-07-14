@@ -24,6 +24,17 @@
         {% empty %}
             <li>No existen eventos registrados.</li>
         {% endfor %}
+
+        <canvas id="riskChart"></canvas>
+        <h2>Representación Matemática del Riesgo</h2>
+
+        <ul>
+            {% for point in points %}
+                <li>
+                    Día {{ point.x }} → {{ point.y }}
+                </li>
+            {% endfor %}
+        </ul>
     </ul>
 
 </body>

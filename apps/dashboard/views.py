@@ -23,10 +23,36 @@ def event_detail(request, event_id):
         is_active=True
     )
 
+    if event.risk_level == "CRITICAL":
+        a, b, c = -1.6, 0, 160
+
+    elif event.risk_level == "HIGH":
+        a, b, c = -1.2, 0, 120
+
+    elif event.risk_level == "MEDIUM":
+        a, b, c = -0.8, 0, 80
+
+    else:
+        a, b, c = -0.5, 0, 50
+
+    points = []
+
+    for x in range(-10, 11):
+        y = (a * (x ** 2)) + (b * x) + c
+
+        if y < 0:
+            y = 0
+
+        points.append({
+            "x": x,
+            "y": round(y, 2)
+        })
+
     return render(
         request,
         "dashboard/event_detail.html",
         {
-            "event": event
+            "event": event,
+            "points": points
         }
     )
