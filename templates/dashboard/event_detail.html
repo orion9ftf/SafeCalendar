@@ -19,13 +19,15 @@
     {% endfor %}
 </ul>
 
-<h2>Representación Matemática del Riesgo</h2>
+    <h2>Representación Matemática del Riesgo</h2>
 
-<canvas id="riskChart" width="800" height="400"></canvas>
+    <canvas id="riskChart" width="800" height="400"></canvas>
 
-{{ points|json_script:"risk-data" }}
+    {{ points|json_script:"risk-data" }}
 
-<p>/Volver</a></p>
+    /
+        Volver
+    </a> <!--- TODO falta ver--->
 
 <!--- scripts --->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
