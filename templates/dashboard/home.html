@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-<html lang=
-<head>
-    <meta charset="utf-8">
-    <title>Calendario Blindado</title>
-</head>
-<body>
-    <h1>Calendario Blindado</h1>
+{% extends "layouts/base.html" %}
+{% block content %}
 
-    <h2>Seleccione un evento</h2>
+<h1>Calendario Blindado</h1>
 
-    <select id="eventSelector">
-        <option value="">Seleccione...</option>
+<h2>Seleccione un evento</h2>
 
-        {% for event in events %}
-            <option value="{{ event.id }}">
-                {{ event.name }}
-            </option>
-        {% endfor %}
-    </select>
+<select id="eventSelector">
+    <option value="">Seleccione...</option>
+    {% for event in events %}
+        <option value="{{ event.id }}">
+            {{ event.name }}
+        </option>
+    {% endfor %}
+</select>
 
 <script>
     document
@@ -32,7 +27,4 @@
             }
         });
 </script>
-
-
-</body>
-</html>
+{% endblock %}
