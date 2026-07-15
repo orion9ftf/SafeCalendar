@@ -35,15 +35,19 @@ def event_detail(request, event_id):
     )
 
     if event.risk_level == "CRITICAL":
+        chart_color = "#dc3545"   # rojo
         a, b, c = -1.6, 0, 160
 
     elif event.risk_level == "HIGH":
+        chart_color = "#fd7e14"   # naranja
         a, b, c = -1.2, 0, 120
 
     elif event.risk_level == "MEDIUM":
+        chart_color = "#ffc107"   # amarillo
         a, b, c = -0.8, 0, 80
 
     else:
+        chart_color = "#198754"   # verde
         a, b, c = -0.5, 0, 50
 
     points = []
@@ -64,6 +68,7 @@ def event_detail(request, event_id):
         "dashboard/event_detail.html",
         {
             "event": event,
-            "points": points
+            "points": points,
+            "chart_color": chart_color,
         }
     )

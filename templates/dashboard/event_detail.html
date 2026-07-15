@@ -19,6 +19,19 @@
     {% endfor %}
 </ul>
 
+{% if event.risk_level == "CRITICAL" %}
+    <span class="badge bg-danger">🔴 Crítico</span>
+
+{% elif event.risk_level == "HIGH" %}
+    <span class="badge bg-warning text-dark">🟠 Alto</span>
+
+{% elif event.risk_level == "MEDIUM" %}
+    <span class="badge bg-info text-dark">🟡 Medio</span>
+
+{% else %}
+    <span class="badge bg-success">🟢 Bajo</span>
+{% endif %}
+
     <h2>Representación Matemática del Riesgo</h2>
 
     <canvas id="riskChart" width="800" height="400"></canvas>
@@ -29,9 +42,9 @@
         Volver
     </a> <!--- TODO falta ver--->
 
-<!--- scripts --->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+    <!--- scripts --->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
     const riskData = JSON.parse(
         document.getElementById('risk-data').textContent
     );
@@ -48,8 +61,8 @@
             datasets: [{
                 label: 'Nivel de Riesgo',
                 data: values,
-                borderColor: 'rgb(220, 53, 69)',
-                backgroundColor: 'rgba(220, 53, 69, 0.2)',
+                borderColor: "{{ chart_color }}",
+                backgroundColor: "{{ chart_color }}33",
                 borderWidth: 3,
                 tension: 0.4,
                 fill: true,
