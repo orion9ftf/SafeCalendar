@@ -2,16 +2,27 @@ from django.shortcuts import get_object_or_404, render
 
 from apps.events.models import Event
 
+
 def home(request):
     events = Event.objects.filter(
         is_active=True
     ).order_by("event_date")
 
+    calendar_events = []
+
+    for event in events:
+        calendar_events.append({
+            "title": event.name,
+            "start": str(event.event_date),
+            "url": f"/evento/{event.id}/",
+        })
+
     return render(
         request,
         "dashboard/home.html",
         {
-            "events": events
+            "events": events,
+            "calendar_events": calendar_events
         }
     )
 

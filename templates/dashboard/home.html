@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+
 {% block content %}
 
 <h1>Calendario Blindado</h1>
@@ -7,6 +8,7 @@
 
 <select id="eventSelector">
     <option value="">Seleccione...</option>
+
     {% for event in events %}
         <option value="{{ event.id }}">
             {{ event.name }}
@@ -14,15 +16,42 @@
     {% endfor %}
 </select>
 
+<div class="mt-4" id="calendar"></div>
+
+{{ calendar_events|json_script:"events-data" }}
+
 <script>
-    document
-        .getElementById("eventSelector")
-        .addEventListener("change", function () {
-            const eventId = this.value;
-            if (eventId) {
-                window.location.href =
-                    "/evento/" + eventId + "/";
-            }
-        });
+document
+    .getElementById("eventSelector")
+    .addEventListener("change", function () {
+
+        const eventId = this.value;
+
+        if (eventId) {
+            window.location.href =
+                "/evento/" + eventId + "/";
+        }
+    });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const calendarData = JSON.parse(
+        document.getElementById("events-data").textContent
+    );
+
+    const calendarEl = document.getElementById("calendar");
+
+    const calendar = new FullCalendar.Calendar(
+        calendarEl,
+        {
+            initialView: "dayGridMonth",
+            height: 650,
+            events: calendarData
+        }
+    );
+
+    calendar.render();
+});
 </script>
+
 {% endblock %}
